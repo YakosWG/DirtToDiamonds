@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "ydtd:blocks/dumb_front",
+    "down": "ydtd:blocks/dumb_bottom",
+    "up": "ydtd:blocks/dumb_top",
+    "east": "ydtd:blocks/dumb_side",
+    "west": "ydtd:blocks/dumb_side",
+    "north": "#front",
+    "south": "ydtd:blocks/dumb_side"
+  }
+}

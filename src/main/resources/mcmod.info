@@ -1,0 +1,16 @@
+[
+{
+  "modid": "ydtd",
+  "name": "Yako's Dirt to Diamond Mod",
+  "description": "Make Dirt into Diamonds",
+  "version": "1.0",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Yako"],
+  "credits": "The Forge and FML guys for making Forge",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
