@@ -20,6 +20,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import yako.dirttodiamonds.blocks.BlockDUMB;
 import yako.dirttodiamonds.init.Config;
+import yako.dirttodiamonds.items.OutputSlotHandler;
 
 public class TileDUMB extends TileEntity implements ITickable {
 
@@ -35,7 +36,8 @@ public class TileDUMB extends TileEntity implements ITickable {
 			TileDUMB.this.markDirty();
 		}
 	};
-	protected ItemStackHandler outputSlot = new ItemStackHandler() {
+	protected OutputSlotHandler outputSlot = new OutputSlotHandler() {
+
 		@Override
 		protected void onContentsChanged(int slot) {
 			TileDUMB.this.markDirty();
@@ -136,11 +138,11 @@ public class TileDUMB extends TileEntity implements ITickable {
 
 					if (PROGRESS == Config.TOTAL_PROGRESS_TIME) {
 
-						IItemHandler capability = getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+						//IItemHandler capability = getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
 
 						ItemStack istack = new ItemStack(Item.getByNameOrId("minecraft:diamond"), 1);
 
-						if (capability.insertItem(1, istack, false).getCount() == 0) {
+						if (outputSlot.actualInsertItem(0, istack, false, true).getCount() == 0) {
 							PROGRESS = 0;
 						}
 

@@ -1,0 +1,33 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "dxd",
+        "dfd",
+        "dxd"
+    ],
+    "key":
+    {
+        "x":
+        {
+            "type": "forge:ore_dict",
+            "ore": "gemDiamond"
+        },
+        "d":
+        {
+            "item": "minecraft:dirt",
+            "data": 0
+        },
+		"f":
+		{
+			"item": "minecraft:furnace",
+			"data": 0
+		}
+    },
+    "result":
+    {
+        "item": "ydtd:dumb",
+        "count": 1,
+        "data": 0
+    }
+}
