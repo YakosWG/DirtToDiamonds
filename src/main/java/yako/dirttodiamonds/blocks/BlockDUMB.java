@@ -3,11 +3,13 @@ package yako.dirttodiamonds.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
@@ -16,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -32,11 +35,25 @@ public class BlockDUMB extends Block implements ITileEntityProvider {
 		super(Material.GROUND);
 		setUnlocalizedName(DirtToDiamonds.MODID + ".dumb");
 		setRegistryName(DirtToDiamonds.MODID, "dumb");
-		
+
 		setHarvestLevel("shovel", 0);
 		setHardness(1.5f);
+		setResistance(0.5f);
+		setCreativeTab(CreativeTabs.DECORATIONS);
+		setSoundType(SoundType.GROUND);
 
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+	}
+
+	@Override
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+
+		if (state.getProperties().get(LIT).equals(true)) {
+
+			return 11;
+
+		} else
+			return super.getLightValue(state, world, pos);
 	}
 
 	@Override

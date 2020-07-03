@@ -19,7 +19,7 @@ import yako.dirttodiamonds.proxy.CommonProxy;
 public class DirtToDiamonds {
 	public static final String MODID = "ydtd";
 	public static final String NAME = "Yako's Dirt to Diamonds";
-	public static final String VERSION = "1.0";
+	public static final String VERSION = "1.0-beta";
 
 	@SidedProxy(clientSide = "yako.dirttodiamonds.proxy.ClientProxy", serverSide = "yako.dirttodiamonds.proxy.ServerProxy")
 	public static CommonProxy proxy;

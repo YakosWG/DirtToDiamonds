@@ -26,6 +26,7 @@ public class GUI_DUMB extends GuiContainer {
 
 		xSize = WIDTH;
 		ySize = HEIGHT;
+		
 	}
 
 	@Override
@@ -33,12 +34,28 @@ public class GUI_DUMB extends GuiContainer {
 		mc.getTextureManager().bindTexture(background);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		drawTexturedModalRect(guiLeft + 79, guiTop + 35, 176, 14, getScaledProgress(), 17);
-		
+
 		if (te.ilit == 1) {
-			
-			drawTexturedModalRect(guiLeft + 83, guiTop + 19, 176 , 0, 14, 14);
-			
+
+			drawTexturedModalRect(guiLeft + 83, guiTop + 19, 176, 0, 14, 14);
+
 		}
+		
+	}
+
+	@Override
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+		//Never let me write GUI code again
+
+		this.fontRenderer.drawString("D.U.M.B",8 , 4, 4210752); 
+		this.fontRenderer.drawString("Inventory", 8, this.ySize - 96 + 2, 4210752);
+	}
+
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		this.drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	private int getScaledProgress() {
@@ -49,4 +66,5 @@ public class GUI_DUMB extends GuiContainer {
 		return (j != 0 ? i * 24 / j : 0);
 
 	}
+	
 }
