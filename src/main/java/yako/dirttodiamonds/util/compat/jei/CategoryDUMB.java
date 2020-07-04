@@ -1,5 +1,6 @@
 package yako.dirttodiamonds.util.compat.jei;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -21,6 +22,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.oredict.OreDictionary;
 import yako.dirttodiamonds.DirtToDiamonds;
 import yako.dirttodiamonds.init.Config;
 
@@ -28,6 +30,7 @@ public class CategoryDUMB implements IRecipeCategory<IRecipeWrapper> {
 
 	protected static final int input = 0;
 	protected static final int output = 1;
+	public static String UID = DirtToDiamonds.MODID + ".dumb";
 
 	protected static final ResourceLocation textures = new ResourceLocation(DirtToDiamonds.MODID,
 			"textures/gui/container/dumb.png");
@@ -57,6 +60,21 @@ public class CategoryDUMB implements IRecipeCategory<IRecipeWrapper> {
 
 		}
 
+		@Override
+		public List<String> getTooltipStrings(int mouseX, int mouseY) {
+
+			if (34 <= mouseX && mouseX < 34 + 24 && 19 <= mouseY && mouseY < 19 + 17) {
+
+				List<String> col = new ArrayList<String>();
+				col.add(Config.TOTAL_PROGRESS_TIME + " Ticks");
+
+				return col;
+
+			} else
+				return IRecipeWrapper.super.getTooltipStrings(mouseX, mouseY);
+
+		}
+
 		public static List<RecipeWrapperDUMB> getRecipes(IJeiHelpers jeihelpers) {
 
 			List<String> accptInputs = Config.ACCEPTED_BLOCKS;
@@ -67,7 +85,8 @@ public class CategoryDUMB implements IRecipeCategory<IRecipeWrapper> {
 				if (Item.getByNameOrId(s) != null) {
 
 					jeiRecipes.add(
-							new RecipeWrapperDUMB(new ItemStack(Item.getByNameOrId(s)), new ItemStack(Items.DIAMOND)));
+							new RecipeWrapperDUMB(new ItemStack(Item.getByNameOrId(s), 1, OreDictionary.WILDCARD_VALUE),
+									new ItemStack(Items.DIAMOND)));
 
 				}
 
@@ -83,7 +102,7 @@ public class CategoryDUMB implements IRecipeCategory<IRecipeWrapper> {
 
 		IDrawableBuilder staticArrow = guihelper.drawableBuilder(textures, 176, 14, 24, 17);
 		this.animatedArrow = staticArrow.buildAnimated(Config.TOTAL_PROGRESS_TIME, StartDirection.LEFT, false);
-		
+
 		this.staticFlame = guihelper.drawableBuilder(textures, 176, 0, 14, 14).build();
 
 		backround = guihelper.drawableBuilder(textures, 45, 15, 100, 50).build();
@@ -93,7 +112,7 @@ public class CategoryDUMB implements IRecipeCategory<IRecipeWrapper> {
 
 	@Override
 	public String getUid() {
-		return DirtToDiamonds.MODID + ".dumb";
+		return CategoryDUMB.UID;
 	}
 
 	@Override
@@ -125,8 +144,7 @@ public class CategoryDUMB implements IRecipeCategory<IRecipeWrapper> {
 	@Override
 	public void drawExtras(Minecraft minecraft) {
 		animatedArrow.draw(minecraft, 34, 19);
-		staticFlame.draw(minecraft, 82-45, 18-15);
+		staticFlame.draw(minecraft, 82 - 45, 18 - 15);
 	}
-	
 
 }

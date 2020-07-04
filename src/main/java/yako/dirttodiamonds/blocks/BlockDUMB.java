@@ -1,5 +1,8 @@
 package yako.dirttodiamonds.blocks;
 
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
@@ -23,9 +26,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import yako.dirttodiamonds.DirtToDiamonds;
+import yako.dirttodiamonds.init.Config;
 import yako.dirttodiamonds.tile.TileDUMB;
+import yako.dirttodiamonds.util.compat.top.TOPInfoProvider;
 
-public class BlockDUMB extends Block implements ITileEntityProvider {
+public class BlockDUMB extends Block implements ITileEntityProvider, TOPInfoProvider {
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public static final PropertyBool LIT = PropertyBool.create("lit");
@@ -50,7 +55,7 @@ public class BlockDUMB extends Block implements ITileEntityProvider {
 
 		if (state.getProperties().get(LIT).equals(true)) {
 
-			return 11;
+			return 13;
 
 		} else
 			return super.getLightValue(state, world, pos);
@@ -142,6 +147,23 @@ public class BlockDUMB extends Block implements ITileEntityProvider {
 		}
 
 		super.breakBlock(worldIn, pos, state);
+	}
+
+	@Override
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world,
+			IBlockState blockState, IProbeHitData data) {
+
+		TileEntity tileentity = world.getTileEntity(data.getPos());
+
+		if (tileentity instanceof TileDUMB) {
+
+			TileDUMB te = (TileDUMB) tileentity;
+			double scaledProgress = (te.getProgress() * (100f / Config.TOTAL_PROGRESS_TIME));
+
+			probeInfo.progress(Math.round(scaledProgress), 100, probeInfo.defaultProgressStyle().suffix("%"));
+
+		}
+
 	}
 
 }
